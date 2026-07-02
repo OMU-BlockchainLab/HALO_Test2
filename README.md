@@ -64,4 +64,4 @@ npm run dev
 
 ## Status
 
-🚧 Work in progress.
+Work in progress.
