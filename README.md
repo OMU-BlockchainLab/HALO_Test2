@@ -1,6 +1,6 @@
 # HALO Project
 
-HALO is an intergenerational networking web app that connects people across generations to share skills, knowledge, and experiences.
+HALO is an intergenerational networking web app for people to share skills, knowledge, and experiences.
 
 ## Tech Stack
 
