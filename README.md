@@ -47,7 +47,6 @@ npm run dev
 HALOProject/
 ├── backend/    # FastAPI backend
 ├── frontend/   # Next.js frontend
-└── requirements.txt
 ```
 
 ## Troubleshooting
