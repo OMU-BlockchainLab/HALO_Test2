@@ -33,7 +33,7 @@ frontend/
 User ↔ Frontend (Next.js) ↔ Backend (FastAPI) ↔ Database (MongoDB)
 ```
 
-When a user does something on the frontend (submits a form, clicks a button), the frontend sends an HTTP request to the backend. The backend processes it — validates data, applies logic, reads or writes to the DB — and sends a response back. The frontend then updates what the user sees based on that response.
+When a user does something on the frontend (submits a form, clicks a button), the frontend sends an HTTP request to the backend. The backend processes it: validates data, applies logic, reads or writes to the DB... and sends a response back. The frontend then updates what the user sees based on that response.
 
 ---
 
