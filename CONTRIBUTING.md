@@ -23,9 +23,9 @@ frontend/
 ---
 ## How it all fits together
 
-**The backend** is a server — it runs permanently, holds the business logic, and is the only one allowed to talk to the database. It exposes HTTP endpoints that the frontend can call to request or send data. It never directly touches what the user sees.
+**The backend** is a server. It runs permanently, holds the business logic, and is the only one allowed to talk to the database. It exposes HTTP endpoints that the frontend can call to request or send data. It never directly touches what the user sees.
 
-**The frontend** is what the user sees and interacts with. It has no direct access to the database — it can only ask the backend for data, or send data to the backend to be processed and stored. It is responsible for rendering the UI and reacting to user actions.
+**The frontend** is what the user sees and interacts with. It has no direct access to the database and can only ask the backend for data, or send data to the backend to be processed and stored. It is responsible for rendering the UI and reacting to user actions.
 
 **The database** stores everything that needs to persist. Only the backend talks to it.
 
