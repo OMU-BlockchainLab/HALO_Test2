@@ -65,3 +65,40 @@ npm run dev
 ## Status
 
 Work in progress.
+
+# Contributing
+
+This is a developer's guide on how to add a new feature (like a game) to the current HALO Project structure
+
+## Project Structure
+
+```
+backend/app/
+├── models/         # Data shapes (Pydantic)
+├── routers/        # HTTP endpoints (FastAPI)
+├── services/       # Reusable business logic
+├── database.py     # MongoDB connection
+└── main.py         # Entry point, router registration, CORS
+
+frontend/
+├── app/
+│   ├── [feature]/
+│   │   └── page.tsx    # One page = one folder + page.tsx
+│   └── lib/
+│       └── api.ts      # All fetch calls centralized here
+```
+
+---
+
+## Architecture Rules
+
+| Where to put it | When |
+|---|---|
+| `models/new.py` | New object stored in DB |
+| `services/new_service.py` | Complex or reusable logic |
+| `routers/new.py` | New endpoints |
+| `main.py` | Register every new router here |
+| `lib/api.ts` | Every new fetch call |
+| `app/[name]/page.tsx` | New page |
+
+---
