@@ -64,6 +64,8 @@ Not every feature needs all the pieces. Use only what you need:
 
 A purely frontend feature (e.g. a local game with no persistence) only needs a `page.tsx`. A feature that stores data needs models + router + page. Its up to you.
 
+## Backend
+
 ### Models (`models/new.py`)
 
 Used to define the structure of custom objects / data stored or exchanged with the backend.
@@ -140,6 +142,8 @@ app.include_router(new_router)
 ```
 
 ---
+
+## Frontend
 
 ### Fetch functions (`lib/api.ts`)
 
