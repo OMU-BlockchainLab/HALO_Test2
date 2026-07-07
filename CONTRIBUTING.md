@@ -126,3 +126,63 @@ app.include_router(new_router)
 
 ---
 
+### Fetch functions (`lib/api.ts`)
+
+Whenever the frontend wants to call a endpoint from the backend (get, post...), we use the fetch(url) function with url being the url of the backend endpoint we want to call. Try to never write `fetch()` directly in a Next.js page. Instead, always go through `lib/api.ts`. This file centralizes every fetch requests functions in one place. This is better for the long run because if at any point (e.g. during deployment of the app) the url changes, we only need change it in one file:
+
+```typescript
+export async function getMyThing(id: string) {
+  const response = await fetch(`${API_URL}/my-things/${id}`, {
+    credentials: "include"  // always include — sends the session cookie
+  })
+  if (!response.ok) throw new Error("Not found")
+  return response.json()
+}
+```
+
+---
+
+### Page (`app/[name]/page.tsx`)
+
+Always needed. This is the page the users will see. Structure depends on whether the page is protected and whether it fetches data:
+
+```tsx
+"use client"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import { getCurrentUser } from "@/lib/api"
+
+export default function MyPage() {
+  const router = useRouter()
+  const [data, setData] = useState<any>(null)
+
+  useEffect(() => {
+    async function load() {
+      // Only needed on protected pages
+      const user = await getCurrentUser()
+      if (!user) { router.push("/login"); return }
+
+      // fetch your data here if needed
+      setData(...)
+    }
+    load()
+  }, [router])
+
+  // Always handle loading state — avoids rendering with undefined data
+  if (!data) return <div className="min-h-screen flex items-center justify-center"><p>Loading...</p></div>
+
+  return (
+    <div className="p-8">
+      {/* your UI */}
+    </div>
+  )
+}
+```
+
+**Rules:**
+- `"use client"` at the top if the page uses `useState`, `useEffect`, or event handlers.
+- The auth check at the start of `useEffect` if the page is protected.
+- Always handle the loading state before rendering.
+- For dynamic routes (e.g. `/profile/[id]`): create a folder literally named `[id]` and use `React.use(params)` to unwrap the id.
+
+---
