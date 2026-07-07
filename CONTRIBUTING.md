@@ -21,6 +21,21 @@ frontend/
 ```
 
 ---
+## How it all fits together
+
+**The backend** is a server — it runs permanently, holds the business logic, and is the only one allowed to talk to the database. It exposes HTTP endpoints that the frontend can call to request or send data. It never directly touches what the user sees.
+
+**The frontend** is what the user sees and interacts with. It has no direct access to the database — it can only ask the backend for data, or send data to the backend to be processed and stored. It is responsible for rendering the UI and reacting to user actions.
+
+**The database** stores everything that needs to persist. Only the backend talks to it.
+
+```
+User ↔ Frontend (Next.js) ↔ Backend (FastAPI) ↔ Database (MongoDB)
+```
+
+When a user does something on the frontend (submits a form, clicks a button), the frontend sends an HTTP request to the backend. The backend processes it — validates data, applies logic, reads or writes to the DB — and sends a response back. The frontend then updates what the user sees based on that response.
+
+---
 
 ## Architecture Rules
 
@@ -183,6 +198,17 @@ export default function MyPage() {
 - `"use client"` at the top if the page uses `useState`, `useEffect`, or event handlers.
 - The auth check at the start of `useEffect` if the page is protected.
 - Always handle the loading state before rendering.
-- For dynamic routes (e.g. `/profile/[id]`): create a folder literally named `[id]` and use `React.use(params)` to unwrap the id.
+- For dynamic routes (e.g. `/profile/[id]`): create a folder literally named `[id]` and use `React.use(params)` to unwrap the id (see frontend/app/profile/[id]/page.tsx for a working example).
+
+---
+
+## Explaining Sessions & Cookies
+
+1. On `/login`, the server generates a random token, stores it in the `sessions` MongoDB collection, and sends it back as an httpOnly cookie.
+2. The browser stores the cookie and automatically attaches it to every subsequent request to the backend.
+3. Protected endpoints read the cookie via `Cookie(default=None)`, look it up in `sessions`, and get the `user_id` from there.
+4. On `/logout`, the session is deleted from MongoDB and the browser cookie is cleared.
+
+Frontend fetch calls must include `credentials: "include"` — without it, the browser won't send the cookie on cross-origin requests (`localhost:3000` → `localhost:8000`).
 
 ---
