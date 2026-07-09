@@ -64,5 +64,7 @@ npm run dev
 
 ## Status
 
-Work in progress.
+### Work in progress
+- Multiple games
+- Player scores saved on profile
 
