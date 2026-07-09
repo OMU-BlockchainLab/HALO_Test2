@@ -55,10 +55,10 @@ export default function DashboardPage() {
           <p>Edit your info, skills, and hobbies</p>
         </Link>
 
-        <div className="border rounded p-6 opacity-50 cursor-not-allowed">
+        <Link href="/games" className="border rounded p-6 hover:shadow-lg transition block">
           <h2 className="text-xl font-bold mb-2">Icebreaker Games</h2>
-          <p>Coming soon</p>
-        </div>
+          <p>Play a game with the other users</p>
+        </Link>
       </div>
     </div>
   )
