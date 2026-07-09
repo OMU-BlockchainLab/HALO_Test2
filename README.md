@@ -67,4 +67,5 @@ npm run dev
 ### Work in progress
 - Multiple games
 - Player scores saved on profile
+- Files explaining the games (one file for the rules to players, one file for the explaining the code)
 
