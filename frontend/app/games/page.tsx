@@ -49,6 +49,11 @@ export default function GamesPage() {
                     </p>
                 </Link>
 
+                <Link href="/games/bingo" className="border rounded p-6 hover:shadow-lg transition block">
+                    <h2 className="text-xl font-bold mb-2">🟩 Social Bingo</h2>
+                    <p>AI generates a personalised bingo grid. Find people in the group who match each square!</p>
+                </Link>
+
                 <div className="border rounded p-6 opacity-50 cursor-not-allowed">
                     <h2 className="text-xl font-bold mb-2">More games</h2>
                     <p>Coming soon</p>
