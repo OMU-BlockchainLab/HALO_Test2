@@ -2,7 +2,7 @@
 import { useEffect, useState, useCallback, useRef } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { getCurrentUser } from "@/lib/api"
-import { getGame, submitClue, submitGuess, getSecret } from "@/lib/gamesApi"
+import { getGame, submitClue, submitGuess, getSecret } from "@/lib/guessRightApi"
 
 function Slider({ value, onChange, disabled, wordLow, wordHigh }: any) {
     return (

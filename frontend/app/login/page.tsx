@@ -37,6 +37,7 @@ export default function LoginPage() {
                 placeholder="Password"
                 value={pwd}
                 onChange={e => setPwd(e.target.value)}
+                onKeyDown={e => e.key === "Enter" && handleLogin()}
             />
             <button onClick={handleLogin} className="bg-green-500 text-white px-4 py-2 rounded">
                 Login

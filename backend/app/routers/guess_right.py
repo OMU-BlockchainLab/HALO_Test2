@@ -7,7 +7,7 @@ from bson import ObjectId
 
 from app.database import db
 from app.services.auth_services import get_user_id_from_session
-from app.models.game import JoinGameInput, StartGameInput, SubmitClueInput, SubmitGuessInput, TopicEntry
+from app.models.guess_right import JoinGameInput, StartGameInput, SubmitClueInput, SubmitGuessInput, TopicEntry
 
 router = APIRouter(prefix="/games", tags=["games"])
 

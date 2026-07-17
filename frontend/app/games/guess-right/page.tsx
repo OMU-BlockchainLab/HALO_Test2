@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { getCurrentUser } from "@/lib/api"
-import { createGame, joinGame } from "@/lib/gamesApi"
+import { createGame, joinGame } from "@/lib/guessRightApi"
 
 export default function GuessRightHomePage() {
     const router = useRouter()

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { getCurrentUser } from "@/lib/api"
-import { getGame } from "@/lib/gamesApi"
+import { getGame } from "@/lib/guessRightApi"
 
 export default function ResultsPage() {
     const params = useParams()
