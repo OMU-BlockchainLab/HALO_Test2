@@ -4,6 +4,7 @@ import json
 import httpx
 from fastapi import APIRouter, HTTPException, Cookie
 from bson import ObjectId
+from datetime import date
 
 from app.database import db
 from app.services.auth_services import get_user_id_from_session
@@ -258,6 +259,31 @@ def submit_guess(body: SubmitGuessInput, session_token: str | None = Cookie(defa
     return _format_game_state(game)
 
 
+def _update_daily_scores(players: list[str], round_scores: dict, new_total_scores: dict, game: dict):
+    """Update daily high scores for all players when the game finishes."""
+    remaining = [p for p in players if p not in game.get("players_who_gave_clue", [])]
+    if remaining:  # game not finished yet
+        return
+    
+    today = date.today().isoformat()
+    for player in players:
+        total = new_total_scores.get(player, 0)
+        user = users_collection.find_one({"name": player})
+        if not user:
+            continue
+        
+        existing = user.get("daily_scores", {}).get("guess_right", {})
+        if existing.get("date") == today:
+            new_score = max(existing.get("score", 0), total)
+        else:
+            new_score = total
+        
+        users_collection.update_one(
+            {"name": player},
+            {"$set": {"daily_scores.guess_right": {"score": new_score, "date": today}}}
+        )
+
+
 def _resolve_round(game):
     secret = game["current_secret_number"]
     guesses = game.get("current_guesses", {})
@@ -331,7 +357,7 @@ def _resolve_round(game):
                 },
             },
         )
-
+    _update_daily_scores(all_players, round_scores, new_total_scores, game)
     return games_collection.find_one({"room_code": game["room_code"]})
 
 

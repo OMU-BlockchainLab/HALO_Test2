@@ -11,7 +11,8 @@ def user_helper(user_dict: dict) -> User:
         age=user_dict["age"],
         gender=user_dict["gender"],
         pwd_hash=user_dict["pwd_hash"],
-        skills=user_dict.get("skills", [])
+        skills=user_dict.get("skills", []),
+        daily_scores=user_dict.get("daily_scores", {})
     )
 
 users_collection = db['users']

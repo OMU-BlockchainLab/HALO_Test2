@@ -61,7 +61,9 @@ def me(session_token: str | None = Cookie(default=None)):
         "name": user["name"],
         "email": user["email"],
         "age": user["age"],
-        "gender": user["gender"]
+        "gender": user["gender"],
+        "skills": user.get("skills", []),
+        "daily_scores": user.get("daily_scores", {})
     }
 
 @router.post("/me/password")

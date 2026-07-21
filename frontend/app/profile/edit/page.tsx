@@ -101,6 +101,23 @@ export default function ProfilePage() {
     <div className="p-8 max-w-xl mx-auto flex flex-col gap-8">
       <h1 className="text-3xl font-bold">My Profile</h1>
 
+      {user.daily_scores && Object.keys(user.daily_scores).length > 0 && (
+      <div>
+        <h2 className="text-xl font-bold mb-3">🎮 Today's best scores</h2>
+        <div className="flex flex-wrap gap-3">
+          {Object.entries(user.daily_scores).map(([game, data]: any) => (
+            <div key={game} className="bg-blue-50 border border-blue-200 rounded-lg px-4 py-3 text-center">
+              <p className="text-xs text-gray-500 mb-1">
+                {game === "guess_right" ? "🎯 Guess Right" : game}
+              </p>
+              <p className="text-2xl font-black text-blue-600">{data.score}</p>
+              <p className="text-xs text-gray-400">pts</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      )}
+
       {/* Email */}
       <div className="border rounded p-4 flex flex-col gap-3">
         <h2 className="text-xl font-bold">Email</h2>

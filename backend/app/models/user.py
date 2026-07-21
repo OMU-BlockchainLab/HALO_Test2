@@ -13,6 +13,7 @@ class User(BaseModel):
     gender: int # 0 for male, 1 for female, 2 for other
     pwd_hash: str
     skills: list[Skill] = []
+    daily_scores: dict = {}
 
 class UserUpdate(BaseModel):
     name: Optional[str] = None
@@ -21,6 +22,7 @@ class UserUpdate(BaseModel):
     gender: Optional[int] = None
     pwd_hash: Optional[str] = None
     skills: Optional[list[Skill]] = None
+    daily_scores: Optional[dict] = None
 
 class RegisterRequest(BaseModel):
     name: str
